@@ -1,17 +1,24 @@
+//Default Imports
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
 const port = process.env.PORT || 8080;
 
+//server instance
 const server = express();
 
+//router imports
+const hospitalRouter = require('./src/routes/hospitals');
+
+//middleware usages
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(morgan('dev'));
 
-server.listen(port, () => {
-	console.log(`🚀🌎 Server is running at http://localhost:${port} 🚀`);
-});
+const mongoURI = 'mongodb://localhost/hospital-list-db';
 
 server.get('/', (req, res) => {
 	try {
@@ -20,6 +27,25 @@ server.get('/', (req, res) => {
 		next(err);
 	}
 });
+server.use('/hospital', hospitalRouter);
+
+server.listen(port, () => {
+	console.log(`🚀🌎 Server is running at http://localhost:${port} 🚀`);
+});
+
+mongoose
+	.connect(mongoURI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true
+	})
+	.then(() => {
+		console.log('MongoDB Connected....!!!');
+	})
+	.catch((error) => {
+		console.log(error);
+	});
 
 server.all('*', (req, res) => {
 	res.status(404).json({ message: "The URL you are looking for can't be found" });
