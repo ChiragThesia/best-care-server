@@ -1,4 +1,4 @@
-# best-care-server
+# Best Care Server
 Beyond Trust - API Engineer code challange. 
 
 > Third Party API Utilized: https://data.cms.gov/provider-data/dataset/yq43-i98g
