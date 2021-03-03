@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const axios = require('axios');
 const Hospital = require('../models/hospital');
 
 router.get('/', (req, res) => {
@@ -14,35 +13,6 @@ router.get('/', (req, res) => {
 		res.status(400).json(error.message);
 	}
 });
-
-// router.get('/list', async (req, res) => {
-// 	try {
-// 		const { abrState } = req.body;
-// 		const uri =
-// 			'https://data.cms.gov/provider-data/api/1/datastore/sql?query=[SELECT * FROM 9af2a351-ba4e-5af4-b0e7-542e4bbd1af4][LIMIT 500 OFFSET 3116];&sho_db_columns=true';
-// 		const api_url = encodeURI(uri);
-// 		await axios
-// 			.get(api_url)
-// 			.then((res) => {
-// 				const data = res.data;
-// 				data.forEach((hospital) => {
-// 					const newHospital = new Hospital({
-// 						hospitalName: hospital['Facility Name'],
-// 						state: hospital.State,
-// 						MRSA_W_Z_Score: hospital['MRSA W Z Score'],
-// 						paymentReduction: hospital['Payment Reduction']
-// 					});
-// 					newHospital.save();
-// 				});
-// 			})
-// 			.catch((error) => {
-// 				console.log(error);
-// 			});
-// 		res.status(200).json(response.data);
-// 	} catch (error) {
-// 		res.status(400).json(error);
-// 	}
-// });
 
 router.get('/allHospitals/:state', (req, res) => {
 	try {
