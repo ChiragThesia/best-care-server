@@ -1,4 +1,4 @@
-[![Heroku](https://heroku-badge.herokuapp.com/?app=intense-ocean-23310)]
+![Heroku](https://heroku-badge.herokuapp.com/?app=intense-ocean-23310)
 
 # Best Care Server
 Beyond Trust - API Engineer code challange. 
