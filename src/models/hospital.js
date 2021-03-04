@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const HospitalSchema = new mongoose.Schema({
 	hospitalName: {
-		type: String
+		type: String,
+		unique: true
 	},
 
 	state: {

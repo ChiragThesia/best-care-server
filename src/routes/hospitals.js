@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
 		res.status(400).json(error.message);
 	}
 });
+
 router.get('/allHospitals/:state', (req, res) => {
 	try {
 		Hospital.find({ state: req.params.state }, function(err, result) {
@@ -31,7 +32,7 @@ router.get('/allHospitals/:state', (req, res) => {
 router.get('/list', async (req, res) => {
 	try {
 		const uri =
-			'https://data.cms.gov/provider-data/api/1/datastore/sql?query=[SELECT * FROM 9af2a351-ba4e-5af4-b0e7-542e4bbd1af4][LIMIT 500 OFFSET 3116];&sho_db_columns=true';
+			'https://data.cms.gov/provider-data/api/1/datastore/sql?query=[SELECT * FROM 9af2a351-ba4e-5af4-b0e7-542e4bbd1af4][OFFSET 3115];&sho_db_columns=true';
 		const api_url = encodeURI(uri);
 		await axios
 			.get(api_url)
@@ -48,11 +49,11 @@ router.get('/list', async (req, res) => {
 				});
 			})
 			.catch((error) => {
-				console.log(error);
+				console.log(error.message);
 			});
 		res.status(200).json({
 			message:
-				'new Hospitals were saved, please use the /allHospitals/:state endpoint to get hospital for your state'
+				'new Hospitals were saved, please use the /allHospitals/:state endpoint to get hospital for a specific  state'
 		});
 	} catch (error) {
 		res.status(400).json(error.message);

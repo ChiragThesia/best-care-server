@@ -1,4 +1,5 @@
 //Default Imports
+require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -18,7 +19,7 @@ server.use(express.json());
 server.use(cors());
 server.use(morgan('dev'));
 
-const mongoURI = 'mongodb://localhost/hospital-list-db';
+const mongoURI = process.env.DB_CONNECTION;
 
 server.get('/', (req, res) => {
 	try {
@@ -27,6 +28,8 @@ server.get('/', (req, res) => {
 		next(err);
 	}
 });
+
+//Hospital router
 server.use('/hospital', hospitalRouter);
 
 server.listen(port, () => {
