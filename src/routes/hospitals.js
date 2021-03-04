@@ -28,8 +28,6 @@ router.get('/allHospitals/:state', (req, res) => {
 	}
 });
 
-module.exports = router;
-
 router.get('/list', async (req, res) => {
 	try {
 		const uri =
@@ -60,3 +58,4 @@ router.get('/list', async (req, res) => {
 		res.status(400).json(error.message);
 	}
 });
+module.exports = router;
